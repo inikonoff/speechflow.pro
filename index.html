@@ -41,11 +41,14 @@
     --text-main: #111827;
     --text-muted: #6B7280;
     --accent: #2563EB;
+    --accent-hover: #1D4ED8;
     --accent-light: #EFF6FF;
     --border: #E5E7EB;
     --card-bg: #FFFFFF;
     --success: #10B981;
     --danger: #EF4444;
+    --tg-bg: #9CB3C9;
+    --tg-user: #E1FEC6;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,7 +68,7 @@
     padding: 0 24px;
   }
 
-  /* --- HEADER --- */
+  /* --- HEADER & HERO --- */
   header {
     padding: 80px 0 60px;
     text-align: center;
@@ -106,6 +109,24 @@
     color: var(--text-muted);
   }
   .header-meta span { margin: 0 8px; color: var(--border); }
+  
+  .hero-cta {
+    margin-top: 40px;
+  }
+  .hero-cta .btn-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 10px 20px -10px var(--accent);
+  }
+  .hero-cta .btn-primary:hover {
+    background: var(--accent-hover);
+    transform: translateY(-2px);
+  }
+  .hero-sub {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 16px;
+  }
 
   /* --- TYPOGRAPHY & LAYOUT --- */
   h2 {
@@ -175,17 +196,8 @@
     margin: 48px 0;
     box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
   }
-  .contrast-title {
-    margin-top: 0;
-    text-align: center;
-    font-size: 1.5rem;
-  }
-  .contrast-subtitle {
-    text-align: center;
-    color: var(--text-muted);
-    margin-bottom: 32px;
-    font-size: 1rem;
-  }
+  .contrast-title { margin-top: 0; text-align: center; font-size: 1.5rem; }
+  .contrast-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 32px; font-size: 1rem; }
   .contrast-row {
     display: grid;
     grid-template-columns: 1fr;
@@ -194,36 +206,13 @@
     padding-bottom: 20px;
     margin-bottom: 20px;
   }
-  .contrast-row:last-of-type {
-    border-bottom: none;
-    padding-bottom: 8px;
-    margin-bottom: 0;
-  }
-  .contrast-bad {
-    color: var(--danger);
-    font-size: 1rem;
-    text-decoration: line-through;
-    opacity: 0.8;
-  }
-  .contrast-good {
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: 1.15rem;
-  }
-  .contrast-icon {
-    display: inline-block;
-    width: 24px;
-  }
+  .contrast-row:last-of-type { border-bottom: none; padding-bottom: 8px; margin-bottom: 0; }
+  .contrast-bad { color: var(--danger); font-size: 1rem; text-decoration: line-through; opacity: 0.8; }
+  .contrast-good { color: var(--text-main); font-weight: 600; font-size: 1.15rem; }
+  .contrast-icon { display: inline-block; width: 24px; }
   .contrast-quote {
-    margin-top: 32px;
-    background: var(--bg-color);
-    padding: 24px;
-    border-radius: 12px;
-    text-align: center;
-    font-style: italic;
-    color: var(--text-main);
-    font-weight: 500;
-    font-size: 1.05rem;
+    margin-top: 32px; background: var(--bg-color); padding: 24px; border-radius: 12px;
+    text-align: center; font-style: italic; color: var(--text-main); font-weight: 500; font-size: 1.05rem;
   }
 
   /* --- GRID CARDS --- */
@@ -240,112 +229,54 @@
     border: 1px solid var(--border);
     transition: transform 0.2s, box-shadow 0.2s;
   }
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
-  }
-  .card-icon {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  .card h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-  .card p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    margin-bottom: 0;
-  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1); }
+  .card-icon { font-size: 2.5rem; margin-bottom: 20px; }
+  .card h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 12px; }
+  .card p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; }
 
   /* --- PERSONAS --- */
-  .personas-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 32px 0;
-  }
-  .persona {
-    background: var(--card-bg);
-    padding: 24px 16px;
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    text-align: center;
-    transition: transform 0.2s;
-  }
+  .personas-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 32px 0; }
+  .persona { background: var(--card-bg); padding: 24px 16px; border-radius: 16px; border: 1px solid var(--border); text-align: center; transition: transform 0.2s; }
   .persona:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.04); }
   .persona-emoji { font-size: 2rem; margin-bottom: 12px; }
-  .persona-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  .persona-role {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    line-height: 1.4;
-  }
+  .persona-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; }
+  .persona-role { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
 
   /* --- TIMELINE --- */
-  .timeline {
-    border-left: 2px solid var(--border);
-    margin: 40px 0 40px 16px;
-    padding-left: 32px;
-  }
-  .timeline-item {
-    position: relative;
-    margin-bottom: 40px;
-  }
+  .timeline { border-left: 2px solid var(--border); margin: 40px 0 40px 16px; padding-left: 32px; }
+  .timeline-item { position: relative; margin-bottom: 40px; }
   .timeline-item:last-child { margin-bottom: 0; }
   .timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -40px;
-    top: 4px;
-    width: 14px;
-    height: 14px;
-    background: var(--accent);
-    border-radius: 50%;
-    border: 3px solid var(--bg-color);
+    content: ''; position: absolute; left: -40px; top: 4px; width: 14px; height: 14px;
+    background: var(--accent); border-radius: 50%; border: 3px solid var(--bg-color);
   }
-  .timeline-time {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    margin-bottom: 8px;
-  }
-  .timeline-item h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-  }
-  .timeline-item p {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    margin-bottom: 0;
-  }
+  .timeline-time { font-size: 0.75rem; text-transform: uppercase; color: var(--accent); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .timeline-item h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 8px; }
+  .timeline-item p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; }
 
-  /* --- CHAT DEMO --- */
+  /* --- TELEGRAM CHAT DEMO --- */
   .chat-demo {
-    background: #F3F4F6;
+    background: var(--tg-bg);
     border-radius: 24px;
     padding: 32px;
     margin: 48px 0;
-    border: 1px solid var(--border);
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
   }
   .chat-header {
     text-align: center;
     font-size: 0.8rem;
     font-weight: 600;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.9);
     margin-bottom: 32px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
+    background: rgba(0,0,0,0.15);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
   }
   .msg { display: flex; flex-direction: column; margin-bottom: 20px; }
   .msg.user { align-items: flex-end; }
@@ -353,127 +284,84 @@
   
   .bubble {
     max-width: 85%;
-    padding: 14px 20px;
-    border-radius: 20px;
+    padding: 12px 16px;
+    border-radius: 16px;
     font-size: 0.95rem;
     line-height: 1.5;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
   }
   .msg.user .bubble {
-    background: var(--accent);
-    color: white;
+    background: var(--tg-user);
+    color: #000;
     border-bottom-right-radius: 4px;
   }
   .msg.bot .bubble {
-    background: white;
-    color: var(--text-main);
+    background: #FFFFFF;
+    color: #000;
     border-bottom-left-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
   .sender-name {
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.9);
+    font-weight: 500;
     margin-bottom: 6px;
     margin-left: 12px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
   }
   .chat-annotation {
     font-size: 0.8rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.85);
     font-style: italic;
     margin: -8px 0 16px 12px;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.1);
   }
   .correction-card {
-    background: #ECFDF5;
-    border: 1px solid #A7F3D0;
-    color: #065F46;
-    padding: 14px 18px;
+    background: #FFFFFF;
+    border-left: 4px solid var(--accent);
+    color: var(--text-main);
+    padding: 12px 16px;
     border-radius: 12px;
     font-size: 0.9rem;
     margin: 4px 0 20px;
     display: inline-block;
     max-width: 85%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
-  /* --- ROADMAP & STATS --- */
-  .roadmap {
-    margin: 40px 0;
-  }
-  .roadmap-phase {
-    border-top: 1px solid var(--border);
-    padding: 24px 0;
-  }
-  .phase-label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-  }
-  .roadmap-phase h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    margin-bottom: 16px;
-  }
-  .phase-items { list-style: none; padding: 0; }
-  .phase-items li {
-    font-size: 0.95rem;
-    color: var(--text-main);
-    margin-bottom: 8px;
-    padding-left: 20px;
-    position: relative;
-  }
-  .phase-items li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 40px 0;
-  }
-  .stat-card {
+  /* --- PRICING & FAQ --- */
+  .pricing-card {
     background: var(--card-bg);
-    padding: 24px;
-    text-align: left;
+    padding: 36px 32px;
     border-radius: 16px;
     border: 1px solid var(--border);
-    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   }
-  .stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.05);
+  .pricing-card.pro {
+    border: 2px solid var(--accent);
+    box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.2);
   }
+  .pricing-card h4 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; }
+  .pricing-price { font-size: 1rem; color: var(--text-muted); margin-bottom: 24px; }
+  .pricing-card ul { list-style: none; padding: 0; }
+  .pricing-card li { margin-bottom: 12px; font-size: 0.95rem; display: flex; align-items: flex-start; gap: 10px; }
+  
+  .faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+  .faq-q { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; margin-bottom: 8px; color: var(--text-main); }
+  .faq-a { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 0; }
 
-  /* --- PRICING HINT --- */
-  .pricing-hint {
-    background: var(--accent-light);
-    border: 1px solid #BFDBFE;
-    border-radius: 16px;
-    padding: 28px 32px;
-    margin: 48px 0 0;
-    display: flex;
-    gap: 32px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .pricing-hint-item {
-    text-align: center;
-  }
-  .pricing-hint-item strong {
-    display: block;
-    font-size: 1.1rem;
-    color: var(--text-main);
-    margin-bottom: 4px;
-  }
-  .pricing-hint-item span {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
+  /* --- ROADMAP & STATS --- */
+  .roadmap { margin: 40px 0; }
+  .roadmap-phase { border-top: 1px solid var(--border); padding: 24px 0; }
+  .phase-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+  .roadmap-phase h4 { font-family: 'Playfair Display', serif; font-size: 1.25rem; margin-bottom: 16px; }
+  .phase-items { list-style: none; padding: 0; }
+  .phase-items li { font-size: 0.95rem; color: var(--text-main); margin-bottom: 8px; padding-left: 20px; position: relative; }
+  .phase-items li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 40px 0; }
+  .stat-card { background: var(--card-bg); padding: 24px; text-align: left; border-radius: 16px; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+  .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.05); }
 
   /* --- CTA --- */
   .cta-section {
@@ -484,35 +372,16 @@
     text-align: center;
     margin: 32px 0 80px;
   }
-  .cta-section h2 {
-    color: white;
-    border: none;
-    margin-top: 0;
-    padding-bottom: 0;
-  }
+  .cta-section h2 { color: white; border: none; margin-top: 0; padding-bottom: 0; }
   .btn-primary {
-    display: inline-block;
-    background: white;
-    color: var(--text-main);
-    font-weight: 600;
-    font-size: 1.1rem;
-    padding: 18px 36px;
-    border-radius: 100px;
-    text-decoration: none;
-    margin-top: 24px;
-    transition: transform 0.2s;
+    display: inline-block; background: white; color: var(--text-main); font-weight: 600; font-size: 1.1rem;
+    padding: 18px 36px; border-radius: 100px; text-decoration: none; transition: transform 0.2s;
   }
   .btn-primary:hover { transform: scale(1.05); }
 
   .ornament { text-align: center; color: var(--border); font-size: 1.5rem; margin: 48px 0; letter-spacing: 0.5em; }
 
-  footer {
-    text-align: center;
-    padding: 40px 0;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-    border-top: 1px solid var(--border);
-  }
+  footer { text-align: center; padding: 40px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
 
   @media (max-width: 600px) {
     .grid-2 { grid-template-columns: 1fr; }
@@ -520,7 +389,6 @@
     .stats-grid { grid-template-columns: 1fr; }
     .chat-demo { padding: 20px; }
     .contrast-box { padding: 24px; }
-    .pricing-hint { flex-direction: column; gap: 16px; }
   }
 </style>
 </head>
@@ -533,6 +401,11 @@
     <p class="tagline">Бот, который слышит вашу речь, отвечает живым голосом и учит говорить бегло, а не просто знать правила.</p>
     <div class="header-meta">
       Три режима <span>|</span> Шесть персонажей <span>|</span> Распознавание речи
+    </div>
+    
+    <div class="hero-cta">
+      <a href="https://t.me/speechflowai_bot" class="btn-primary">Запустить в Telegram</a>
+      <p class="hero-sub">Откроется в мессенджере • Без регистрации и паролей</p>
     </div>
   </div>
 </header>
@@ -616,14 +489,6 @@
     </div>
   </div>
 
-  <blockquote>
-    Текстовые сообщения абсолютно безлимитны для всех пользователей. Намеренно.
-    <cite>О философии продукта</cite>
-  </blockquote>
-
-  <p>Текстовый режим отлично подходит для старта, если вам пока страшно говорить. Это время не потеряно: чем больше вы общаетесь, тем лучше персонаж узнаёт вашу лексику и интересы.</p>
-  <p>Но когда между вами и персонажем сложится контекст — смело переходите на голос. Бот распознает вашу речь с идеальной точностью, проанализирует грамматику и ответит живым голосом носителя языка. Вы привыкнете воспринимать беглую речь на слух и перестанете бояться говорить сами.</p>
-
   <h2>С кем вы говорите</h2>
   <p>Каждый персонаж — это отдельная личность со своей историей и уникальным голосом. Они помнят детали из предыдущих сессий, придумывают факты о себе и сохраняют их. Разговор с врачом Грегом не похож на разговор с кофеманом Джейн — и дело здесь далеко не только в имени.</p>
 
@@ -663,16 +528,13 @@
   <h2>Почему это работает там, где другие сдаются</h2>
 
   <h3>Это не просто чат. Это голосовой тренажер.</h3>
-  <p>Бот не просто генерирует текст. Он озвучивает каждое своё сообщение с помощью передовых систем синтеза речи. Вы слышите интонации, паузы и живую речь носителя языка. Это полностью заменяет аудирование в исполнении вашего преподавателя английского языка.</p>
+  <p>Мы используем нейросетевой синтез речи студийного качества. Бот не просто генерирует текст, он озвучивает каждое своё сообщение интонациями носителя языка. Это полностью заменяет аудирование в исполнении живого преподавателя.</p>
 
   <h3>Живой словарь, который не умирает</h3>
-  <p>Вы сохранили слово, посмотрели на него один раз и забыли? Здесь это так не работает. Бот следит за фразами, которые даются вам с трудом, и органично возвращает их в разговор через свои вопросы.</p>
+  <p>Вы сохранили слово, посмотрели на него один раз и забыли? Здесь это так не работает. Кастомный AI-движок следит за фразами, которые даются вам с трудом, и органично возвращает их в разговор через свои вопросы, заставляя вас использовать их на практике.</p>
 
   <h3>Говорить можно всегда</h3>
-  <p>Вы можете отправлять голосовые сколько угодно — бот всегда слышит и транскрибирует вашу речь. Лимит касается только голосовых ответов персонажа. Когда он исчерпан, Mrs. Smith переходит в текст и продолжает давать развёрнутый фидбек письменно — вы говорите, она читает и отвечает. Практика устной речи не прерывается.</p>
-
-  <h3>Статистика, которая говорит честно</h3>
-  <p>После каждой сессии вам доступна подробная статистика. А для глубокого анализа есть режим Deep Dive — это персональный разбор от бота. Он проанализирует ваши диалоги и расскажет, что реально прогрессирует, а где вы регулярно спотыкаетесь в грамматике.</p>
+  <p>Вы можете отправлять голосовые сколько угодно — мощный алгоритм распознавания транскрибирует вашу речь мгновенно. Лимит касается только голосовых ответов персонажа. Когда он исчерпан, собеседник переходит в текст и продолжает общаться письменно. Практика говорения не прерывается.</p>
 
   <div class="ornament">✦ ✦ ✦</div>
 
@@ -681,7 +543,7 @@
   </blockquote>
 
   <h2>Как это выглядит на практике</h2>
-  <p>Вот типичный вечер пользователя Speech Flow Pro: 15 минут, уровень Intermediate, <b>режим Tutor (Голос)</b>, персонаж Jane.</p>
+  <p>Вот типичный вечер пользователя: 15 минут, уровень Intermediate, <b>режим Tutor</b>, собеседник Jane.</p>
 
   <div class="timeline">
     <div class="timeline-item">
@@ -699,15 +561,10 @@
       <h4>Слово из словаря возвращается к вам</h4>
       <p>На прошлой неделе вы добавили фразу «take responsibility». Сегодня Джейн спрашивает: «Do you think people always take responsibility for their choices?» Бот специально выстроил вопрос вокруг этого выражения.</p>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-time">Итог</div>
-      <h4>15 минут разговора — и сломанный барьер</h4>
-      <p>Вы не решали грамматические тесты. Вы просто поговорили вслух на английском. А бот тихо сделал своё дело.</p>
-    </div>
   </div>
 
   <div class="chat-demo">
-    <div class="chat-header">Демо • Tutor Mode • Jane ☕ • Intermediate</div>
+    <div class="chat-header">Демо • Tutor Mode • Jane ☕</div>
 
     <div class="msg user">
       <div class="bubble">▶ 🔘───── 0:08<br><span style="font-size: 0.85em; opacity: 0.8;">"Yesterday I did a big mistake at work and my boss was angry."</span></div>
@@ -724,51 +581,16 @@
       <div class="sender-name">Jane ☕</div>
       <div class="bubble">▶ 🔘─────── 0:12<br>Oh no — we've all been there. Sometimes you make a mistake and it feels like the whole office noticed. What happened, if you don't mind sharing?</div>
     </div>
-    <div class="chat-annotation">↑ Джейн прислала объяснение по-русски, а затем продолжила диалог голосовым сообщением.</div>
+    <div class="chat-annotation">↑ Джейн прислала объяснение по-русски, а затем ответила голосом по-английски.</div>
 
     <div class="msg user">
       <div class="bubble">▶ 🔘───── 0:09<br><span style="font-size: 0.85em; opacity: 0.8;">"I had to take responsibility and explain everything to the client."</span></div>
     </div>
 
     <div class="msg bot">
-      <div class="correction-card" style="border-color: var(--success); background: #F0FDF4;">
+      <div class="correction-card" style="border-left-color: var(--success);">
         ✅ <strong>take responsibility</strong> — Фраза усвоена! Добавлено в вашу статистику.
       </div>
-    </div>
-  </div>
-
-  <h2>Что будет дальше</h2>
-  <p>Speech Flow Pro — это живой продукт, который постоянно развивается. Вот что появится совсем скоро.</p>
-
-  <div class="roadmap">
-    <div class="roadmap-phase">
-      <div class="phase-label">Следующий этап</div>
-      <h4>Глубже в разговор</h4>
-      <ul class="phase-items">
-        <li>Персонаж будет замечать, какие темы вас увлекают, и сам строить разговор вокруг них.</li>
-        <li>Еженедельный дайджест: что вы обсудили, сколько слов отработали, в чём спрогрессировали.</li>
-        <li>Напоминания: бот сам напишет первым, если вы давно не виделись.</li>
-      </ul>
-    </div>
-
-    <div class="roadmap-phase">
-      <div class="phase-label">Средний горизонт</div>
-      <h4>Ваш English Profile</h4>
-      <ul class="phase-items">
-        <li>Бот накапливает понимание вашего словарного профиля, и персонажи начинают говорить в вашем профессиональном домене.</li>
-        <li>Визуальные отчёты: наглядная картина того, как растёт ваш уровень языка.</li>
-        <li>Групповые вызовы: возможность соревноваться в использовании слов с другими пользователями.</li>
-      </ul>
-    </div>
-
-    <div class="roadmap-phase">
-      <div class="phase-label">Будущее</div>
-      <h4>Полноценный языковой тренажёр</h4>
-      <ul class="phase-items">
-        <li>Сценарные разговоры: симуляция собеседования, деловых переговоров или общения в аэропорту.</li>
-        <li>Адаптивная сложность: бот сам поднимает планку лексики, когда видит, что вы готовы.</li>
-        <li>Добавление новых языков.</li>
-      </ul>
     </div>
   </div>
 
@@ -803,15 +625,56 @@
     </div>
     <div class="stat-card">
       <span style="display: block; font-size: 1.5rem; margin-bottom: 8px;">🎤</span>
-      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Голос — без ограничений</span>
-      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Отправляйте войсы сколько угодно. Лимит только на голосовые ответы бота — ваша практика говорения не прерывается.</span>
+      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Голос без ограничений</span>
+      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Отправляйте войсы сколько угодно. Распознавание вашей речи работает всегда.</span>
     </div>
   </div>
 
-  <p>Большинство конкурентов — это либо приложение с детской геймификацией, либо просто текстовый ChatGPT с базовым системным промптом. Speech Flow Pro занимает принципиально другую нишу: это персональный голосовой собеседник. Разница кроется в удержании: фраза, которую вы произнесли вслух в живом эмоциональном разговоре, остаётся с вами навсегда. Слово из заученной карточки — нет.</p>
-  <p>Бот доступен 24 часа в сутки прямо в Telegram. Без установки отдельного приложения. Пять минут голосовых сообщений перед сном или по пути на работу — любой формат работает на ваш результат.</p>
+  <h2>Прозрачные условия</h2>
+  <p>Генерация реалистичного голоса требует огромных вычислительных мощностей. Поэтому мы сделали прозрачную систему, при которой ваша практика не прекращается, даже если бесплатные лимиты исчерпаны.</p>
 
+  <div class="grid-2">
+    <div class="pricing-card">
+      <h4>Standard</h4>
+      <div class="pricing-price">Всегда бесплатно</div>
+      <ul>
+        <li>✅ <span><b>Безлимитные</b> текстовые сообщения</span></li>
+        <li>✅ <span><b>Безлимитное</b> распознавание вашего голоса</span></li>
+        <li>✅ <span>Автоматическое создание словаря и статистика</span></li>
+        <li>✅ <span>Доступ к базовым персонажам</span></li>
+        <li style="color: var(--text-muted);">🟡 <span>5 голосовых ответов от бота в день (далее он отвечает текстом)</span></li>
+      </ul>
+    </div>
+    
+    <div class="pricing-card pro">
+      <h4>Pro</h4>
+      <div class="pricing-price">Скоро в запуске</div>
+      <ul>
+        <li>✅ <span>Всё из тарифа Standard</span></li>
+        <li>✅ <span><b>Все 6 персонажей</b> с их уникальными голосами</span></li>
+        <li>✅ <span><b>Режим Vocab Practice:</b> бот заставляет вас применять новые слова</span></li>
+        <li>✅ <span>Расширенные лимиты генерации аудио-ответов</span></li>
+        <li>✅ <span>Продвинутая аналитика: Deep Dive Reports</span></li>
+      </ul>
+    </div>
+  </div>
 
+  <h2>Частые вопросы</h2>
+  
+  <div class="faq-item">
+    <div class="faq-q">А если у меня сильный акцент? Бот меня поймет?</div>
+    <div class="faq-a">Да. Наш алгоритм распознавания речи натренирован на тысячах часов аудио с разными акцентами со всего мира. Он понимает речь лучше, чем многие люди. Заодно вы перестанете стесняться своего произношения.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Я боюсь говорить, у меня блок. Что делать?</div>
+    <div class="faq-a">Начните с режима PenFriend (Переписка). Пишите текстом, используйте переводчик встроенный прямо в бота, пока не почувствуете себя уверенно. Никто вас не торопит. Когда будете готовы — просто зажмите кнопку микрофона.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">Бот будет исправлять каждую мелкую оговорку?</div>
+    <div class="faq-a">Нет. Вы сами настраиваете строгость проверок в настройках (Relaxed, Balanced, Strict). По умолчанию бот пропускает мелкие оговорки и концентрируется на важных грамматических ошибках, чтобы не сбивать вас с мысли.</div>
+  </div>
 
   <div class="cta-section">
     <h2>Начните говорить сегодня</h2>
