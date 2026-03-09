@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Speech Flow Pro — Говори, а не учи правила</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-color: #FAFAFA;
+    --text-main: #111827;
+    --text-muted: #6B7280;
+    --accent: #2563EB;
+    --accent-light: #EFF6FF;
+    --border: #E5E7EB;
+    --card-bg: #FFFFFF;
+    --success: #10B981;
+    --danger: #EF4444;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.7;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* --- HEADER --- */
+  header {
+    padding: 80px 0 60px;
+    text-align: center;
+  }
+  .pill {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    color: #000;
+  }
+  .tagline {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 32px;
+    font-weight: 300;
+  }
+  .header-meta {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .header-meta span { margin: 0 8px; color: var(--border); }
+
+  /* --- TYPOGRAPHY & LAYOUT --- */
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 80px 0 32px;
+    color: #000;
+    border-bottom: 2px solid var(--text-main);
+    padding-bottom: 16px;
+    display: inline-block;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 40px 0 16px;
+    color: var(--text-main);
+  }
+  p { margin-bottom: 24px; }
+  
+  .lead {
+    font-size: 1.15rem;
+    color: #374151;
+    line-height: 1.8;
+  }
+  .dropcap::first-letter {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5em;
+    font-weight: 800;
+    float: left;
+    line-height: 0.8;
+    margin: 8px 12px 0 0;
+    color: var(--accent);
+  }
+
+  blockquote {
+    background: var(--card-bg);
+    border-left: 4px solid var(--accent);
+    padding: 32px;
+    margin: 48px 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    border-radius: 0 16px 16px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  }
+  blockquote cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-top: 20px;
+  }
+
+  /* --- CONTRAST BLOCK --- */
+  .contrast-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 48px 0;
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.05);
+  }
+  .contrast-title {
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  .contrast-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    font-size: 1rem;
+  }
+  .contrast-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  .contrast-row:last-of-type {
+    border-bottom: none;
+    padding-bottom: 8px;
+    margin-bottom: 0;
+  }
+  .contrast-bad {
+    color: var(--danger);
+    font-size: 1rem;
+    text-decoration: line-through;
+    opacity: 0.8;
+  }
+  .contrast-good {
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1.15rem;
+  }
+  .contrast-icon {
+    display: inline-block;
+    width: 24px;
+  }
+  .contrast-quote {
+    margin-top: 32px;
+    background: var(--bg-color);
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    font-style: italic;
+    color: var(--text-main);
+    font-weight: 500;
+    font-size: 1.05rem;
+  }
+
+  /* --- GRID CARDS --- */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin: 40px 0;
+  }
+  .card {
+    background: var(--card-bg);
+    padding: 32px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+  }
+  .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  .card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .card p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  /* --- PERSONAS --- */
+  .personas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .persona {
+    background: var(--card-bg);
+    padding: 24px 16px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  .persona:hover { transform: translateY(-3px); box-shadow: 0 8px 16px rgba(0,0,0,0.04); }
+  .persona-emoji { font-size: 2rem; margin-bottom: 12px; }
+  .persona-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .persona-role {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* --- TIMELINE --- */
+  .timeline {
+    border-left: 2px solid var(--border);
+    margin: 40px 0 40px 16px;
+    padding-left: 32px;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+  }
+  .timeline-item:last-child { margin-bottom: 0; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 50%;
+    border: 3px solid var(--bg-color);
+  }
+  .timeline-time {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .timeline-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  .timeline-item p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+  }
+
+  /* --- CHAT DEMO --- */
+  .chat-demo {
+    background: #F3F4F6;
+    border-radius: 24px;
+    padding: 32px;
+    margin: 48px 0;
+    border: 1px solid var(--border);
+  }
+  .chat-header {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .msg { display: flex; flex-direction: column; margin-bottom: 20px; }
+  .msg.user { align-items: flex-end; }
+  .msg.bot { align-items: flex-start; }
+  
+  .bubble {
+    max-width: 85%;
+    padding: 14px 20px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+  .msg.user .bubble {
+    background: var(--accent);
+    color: white;
+    border-bottom-right-radius: 4px;
+  }
+  .msg.bot .bubble {
+    background: white;
+    color: var(--text-main);
+    border-bottom-left-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+  .sender-name {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    margin-left: 12px;
+  }
+  .chat-annotation {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: -8px 0 16px 12px;
+  }
+  .correction-card {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+    padding: 14px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    margin: 4px 0 20px;
+    display: inline-block;
+    max-width: 85%;
+  }
+
+  /* --- ROADMAP & STATS --- */
+  .roadmap {
+    margin: 40px 0;
+  }
+  .roadmap-phase {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+  }
+  .phase-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  .roadmap-phase h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+  }
+  .phase-items { list-style: none; padding: 0; }
+  .phase-items li {
+    font-size: 0.95rem;
+    color: var(--text-main);
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+  }
+  .phase-items li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin: 40px 0;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    padding: 24px;
+    text-align: left;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.05);
+  }
+
+  /* --- PRICING HINT --- */
+  .pricing-hint {
+    background: var(--accent-light);
+    border: 1px solid #BFDBFE;
+    border-radius: 16px;
+    padding: 28px 32px;
+    margin: 48px 0 0;
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .pricing-hint-item {
+    text-align: center;
+  }
+  .pricing-hint-item strong {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+  .pricing-hint-item span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* --- CTA --- */
+  .cta-section {
+    background: var(--text-main);
+    color: white;
+    border-radius: 24px;
+    padding: 64px 40px;
+    text-align: center;
+    margin: 32px 0 80px;
+  }
+  .cta-section h2 {
+    color: white;
+    border: none;
+    margin-top: 0;
+    padding-bottom: 0;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: white;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 18px 36px;
+    border-radius: 100px;
+    text-decoration: none;
+    margin-top: 24px;
+    transition: transform 0.2s;
+  }
+  .btn-primary:hover { transform: scale(1.05); }
+
+  .ornament { text-align: center; color: var(--border); font-size: 1.5rem; margin: 48px 0; letter-spacing: 0.5em; }
+
+  footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .personas-grid { grid-template-columns: 1fr 1fr; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .chat-demo { padding: 20px; }
+    .contrast-box { padding: 24px; }
+    .pricing-hint { flex-direction: column; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="pill">Голосовой AI-тренажер в Telegram</div>
+    <h1>Speech Flow Pro</h1>
+    <p class="tagline">Бот, который слышит вашу речь, отвечает живым голосом и учит говорить бегло, а не просто знать правила.</p>
+    <div class="header-meta">
+      Три режима <span>|</span> Шесть голосов <span>|</span> Распознавание речи
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <h2>Почему это не очередной AI-чат</h2>
+  
+  <p class="lead dropcap">Большинство языковых приложений работают как тест. Они дают вам список слов — вы их заучиваете. Дают упражнение — вы его выполняете. Всё строго, по расписанию и невероятно скучно. Через две недели вы смотрите на 340 непрочитанных карточек — и удаляете приложение.</p>
+
+  <p class="lead">Speech Flow Pro устроен иначе. Здесь нет скучных уроков. Есть только разговор — голосовыми сообщениями или текстом — с живым персонажем, который помнит то, что вы обсуждали раньше, замечает ваши ошибки и аккуратно возвращает сложные слова в диалог.</p>
+
+  <blockquote>
+    Fluency — это не идеальное знание грамматики. Это состояние, когда вы открываете рот, и нужное слово приходит само, не заставляя вас паниковать.
+    <cite>Принцип, на котором построен Speech Flow Pro</cite>
+  </blockquote>
+
+  <p class="lead">Единственный способ этого добиться — преодолеть страх и начать говорить. Именно для этого создан бот: он тренирует вашу устную речь каждый день, прямо в Telegram, без подготовки и расписания.</p>
+
+  <div class="contrast-box">
+    <h3 class="contrast-title">Почувствуйте разницу</h3>
+    <p class="contrast-subtitle">Как мы изменили подход к практике языка</p>
+
+    <div>
+      <div class="contrast-row">
+        <div class="contrast-bad">
+          <span class="contrast-icon">❌</span> Пытаться научиться "спикингу", переписываясь текстом
+        </div>
+        <div class="contrast-good">
+          <span class="contrast-icon" style="color: var(--success);">✅</span> Отправлять голосовые сообщения и воспринимать английскую речь на слух
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-bad">
+          <span class="contrast-icon">❌</span> Учить грамматику по таблицам и заставлять себя делать тесты
+        </div>
+        <div class="contrast-good">
+          <span class="contrast-icon" style="color: var(--success);">✅</span> Просто болтать — бот сам заметит ошибки и соберет ваш личный словарь
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-bad">
+          <span class="contrast-icon">❌</span> «Начну, когда найду свободный час на урок»
+        </div>
+        <div class="contrast-good">
+          <span class="contrast-icon" style="color: var(--success);">✅</span> 10 минут голосовых сообщений по дороге на работу — это уже полноценная практика
+        </div>
+      </div>
+    </div>
+
+    <div class="contrast-quote">
+      «Speech Flow Pro делает то же самое, что и хороший репетитор: он развязывает вам язык. Но он всегда в вашем кармане, стоит в разы дешевле и <span style="color: var(--accent);">никогда не осуждает за ошибки или сильный акцент</span>».
+    </div>
+  </div>
+
+  <h2>Три способа тренироваться</h2>
+  <p>Записывайте голосовые или печатайте текст — бот понимает оба формата. У каждого режима своя цель, поэтому Speech Flow Pro предлагает три варианта, чтобы вы сами выбирали нужный ритм.</p>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-icon">🎓</div>
+      <h4>Tutor Mode</h4>
+      <p>Бот отвечает в том же формате: голос на голос, текст на текст. Находит ошибки, объясняет их по-русски и предлагает правильный вариант.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">✍️</div>
+      <h4>PenFriend Mode</h4>
+      <p>Только текстовая переписка. Вы общаетесь с персонажем, как с другом в мессенджере. Никаких жёстких поправок: он тактично вплетает правильные формы в свои ответы, не превращая диалог в лекцию.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎙️</div>
+      <h4>Flow Mode</h4>
+      <p>Только голосовой обмен. Никакого текста, никаких остановок на исправление ошибок. Чистый поток речи. Идеальная тренировка беглости для моментов, когда вы хотите просто разговориться.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎚️</div>
+      <h4>Настройка строгости</h4>
+      <p>Relaxed, Balanced, Strict — выбирайте, насколько жёстко бот разбирает каждую вашу фразу. Только начали говорить или готовы к детальному разбору каждого предложения.</p>
+    </div>
+  </div>
+
+  <blockquote>
+    Текстовые сообщения абсолютно безлимитны для всех пользователей. Намеренно.
+    <cite>О философии продукта</cite>
+  </blockquote>
+
+  <p>Текстовый режим отлично подходит для старта, если вам пока страшно говорить. Это время не потеряно: чем больше вы общаетесь, тем лучше персонаж узнаёт вашу лексику и интересы.</p>
+  <p>Но когда между вами и персонажем сложится контекст — смело переходите на голос. Бот распознает вашу речь с идеальной точностью, проанализирует грамматику и ответит живым голосом носителя языка. Вы привыкнете воспринимать беглую речь на слух и перестанете бояться говорить сами.</p>
+
+  <h2>С кем вы говорите</h2>
+  <p>Каждый персонаж — это отдельная личность со своей историей и уникальным голосом. Они помнят детали из предыдущих сессий, придумывают факты о себе и сохраняют их. Разговор с врачом Грегом не похож на разговор с кофеманом Джейн — и дело здесь далеко не только в имени.</p>
+
+  <div class="personas-grid">
+    <div class="persona">
+      <div class="persona-emoji">🏥</div>
+      <div class="persona-name">Greg</div>
+      <div class="persona-role">Медстудент из Бостона. Спокойный, честный, с сухим юмором.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-emoji">👨‍🍳</div>
+      <div class="persona-name">Mark</div>
+      <div class="persona-role">Самоучка-шеф из Нового Орлеана. Сдержанный, говорит по делу.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-emoji">💻</div>
+      <div class="persona-name">Junior</div>
+      <div class="persona-role">Удалённый разработчик из Денвера. Болтливый, увлечённый, добродушный.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-emoji">👩‍🏫</div>
+      <div class="persona-name">Mrs. Smith</div>
+      <div class="persona-role">Учительница английского. Тёплая, наблюдательная, с тихими стандартами.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-emoji">🌍</div>
+      <div class="persona-name">Summer</div>
+      <div class="persona-role">Тревел-блогер, 47 стран. Амбициозная, прямая, вечно в движении.</div>
+    </div>
+    <div class="persona">
+      <div class="persona-emoji">☕</div>
+      <div class="persona-name">Jane</div>
+      <div class="persona-role">Бывший маркетолог, сейчас мама двойни. Острая на язык, думает быстрее чем говорит.</div>
+    </div>
+  </div>
+
+  <h2>Почему это работает там, где другие сдаются</h2>
+
+  <h3>Это не просто чат. Это голосовой тренажер.</h3>
+  <p>Бот не просто генерирует текст. Он озвучивает каждое своё сообщение с помощью передовых систем синтеза речи. Вы слышите интонации, паузы и живую речь носителя языка. Это полностью заменяет аудирование в исполнении вашего преподавателя английского языка.</p>
+
+  <h3>Живой словарь, который не умирает</h3>
+  <p>Вы сохранили слово, посмотрели на него один раз и забыли? Здесь это так не работает. Бот следит за фразами, которые даются вам с трудом, и органично возвращает их в разговор через свои вопросы.</p>
+
+  <h3>Говорить можно всегда</h3>
+  <p>Вы можете отправлять голосовые сколько угодно — бот всегда слышит и транскрибирует вашу речь. Лимит касается только голосовых ответов персонажа. Когда он исчерпан, Mrs. Smith переходит в текст и продолжает давать развёрнутый фидбек письменно — вы говорите, она читает и отвечает. Практика устной речи не прерывается.</p>
+
+  <h3>Статистика, которая говорит честно</h3>
+  <p>После каждой сессии вам доступна подробная статистика. А для глубокого анализа есть режим Deep Dive — это персональный разбор от бота. Он проанализирует ваши диалоги и расскажет, что реально прогрессирует, а где вы регулярно спотыкаетесь в грамматике.</p>
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <blockquote>
+    Вы не учите язык. Вы на нём разговариваете. Огромная разница, которую вы почувствуете уже через месяц.
+  </blockquote>
+
+  <h2>Как это выглядит на практике</h2>
+  <p>Вот типичный вечер пользователя Speech Flow Pro: 15 минут, уровень Intermediate, <b>режим Tutor (Голос)</b>, персонаж Jane.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-time">Начало</div>
+      <h4>Открываете бота — и записываете войс</h4>
+      <p>Нет кнопки «начать урок». Вы просто нажимаете на микрофон в Telegram и рассказываете Джейн о своём дне.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">3-е сообщение</div>
+      <h4>Ошибка — и разбор без нравоучений</h4>
+      <p>Вы сказали «I did a mistake». Джейн присылает короткую текстовую подсказку на русском языке (почему нужно говорить <i>make</i>), а затем продолжает диалог живым голосовым сообщением на английском.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">7-е сообщение</div>
+      <h4>Слово из словаря возвращается к вам</h4>
+      <p>На прошлой неделе вы добавили фразу «take responsibility». Сегодня Джейн спрашивает: «Do you think people always take responsibility for their choices?» Бот специально выстроил вопрос вокруг этого выражения.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">Итог</div>
+      <h4>15 минут разговора — и сломанный барьер</h4>
+      <p>Вы не решали грамматические тесты. Вы просто поговорили вслух на английском. А бот тихо сделал своё дело.</p>
+    </div>
+  </div>
+
+  <div class="chat-demo">
+    <div class="chat-header">Демо • Tutor Mode • Jane ☕ • Intermediate</div>
+
+    <div class="msg user">
+      <div class="bubble">▶ 🔘───── 0:08<br><span style="font-size: 0.85em; opacity: 0.8;">"Yesterday I did a big mistake at work and my boss was angry."</span></div>
+    </div>
+
+    <div class="msg bot">
+      <div class="correction-card">
+        💡 <b>Разбор ошибки:</b><br>
+        В английском языке со словом mistake всегда используется глагол <i>make</i> (make a mistake), а не <i>do</i>.
+      </div>
+    </div>
+
+    <div class="msg bot">
+      <div class="sender-name">Jane ☕</div>
+      <div class="bubble">▶ 🔘─────── 0:12<br>Oh no — we've all been there. Sometimes you make a mistake and it feels like the whole office noticed. What happened, if you don't mind sharing?</div>
+    </div>
+    <div class="chat-annotation">↑ Джейн прислала объяснение по-русски, а затем продолжила диалог голосовым сообщением.</div>
+
+    <div class="msg user">
+      <div class="bubble">▶ 🔘───── 0:09<br><span style="font-size: 0.85em; opacity: 0.8;">"I had to take responsibility and explain everything to the client."</span></div>
+    </div>
+
+    <div class="msg bot">
+      <div class="correction-card" style="border-color: var(--success); background: #F0FDF4;">
+        ✅ <strong>take responsibility</strong> — Фраза усвоена! Добавлено в вашу статистику.
+      </div>
+    </div>
+  </div>
+
+  <h2>Что будет дальше</h2>
+  <p>Speech Flow Pro — это живой продукт, который постоянно развивается. Вот что появится совсем скоро.</p>
+
+  <div class="roadmap">
+    <div class="roadmap-phase">
+      <div class="phase-label">Следующий этап</div>
+      <h4>Глубже в разговор</h4>
+      <ul class="phase-items">
+        <li>Персонаж будет замечать, какие темы вас увлекают, и сам строить разговор вокруг них.</li>
+        <li>Еженедельный дайджест: что вы обсудили, сколько слов отработали, в чём спрогрессировали.</li>
+        <li>Напоминания: бот сам напишет первым, если вы давно не виделись.</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <div class="phase-label">Средний горизонт</div>
+      <h4>Ваш English Profile</h4>
+      <ul class="phase-items">
+        <li>Бот накапливает понимание вашего словарного профиля, и персонажи начинают говорить в вашем профессиональном домене.</li>
+        <li>Визуальные отчёты: наглядная картина того, как растёт ваш уровень языка.</li>
+        <li>Групповые вызовы: возможность соревноваться в использовании слов с другими пользователями.</li>
+      </ul>
+    </div>
+
+    <div class="roadmap-phase">
+      <div class="phase-label">Будущее</div>
+      <h4>Полноценный языковой тренажёр</h4>
+      <ul class="phase-items">
+        <li>Сценарные разговоры: симуляция собеседования, деловых переговоров или общения в аэропорту.</li>
+        <li>Адаптивная сложность: бот сам поднимает планку лексики, когда видит, что вы готовы.</li>
+        <li>Добавление новых языков.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Честно о том, чем это отличается</h2>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span style="display: block; font-size: 1.5rem; margin-bottom: 8px;">🎓</span>
+      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Tutor Mode</span>
+      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Зеркальный формат с глубоким разбором ошибок и объяснениями на русском языке.</span>
+    </div>
+    <div class="stat-card">
+      <span style="display: block; font-size: 1.5rem; margin-bottom: 8px;">✍️</span>
+      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Penfriend Mode</span>
+      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Дружеская текстовая переписка с мягкими исправлениями прямо в контексте.</span>
+    </div>
+    <div class="stat-card">
+      <span style="display: block; font-size: 1.5rem; margin-bottom: 8px;">🎙️</span>
+      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Flow Mode</span>
+      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Чистый голосовой пинг-понг без остановок. Идеально для преодоления страха говорить.</span>
+    </div>
+
+    <div class="stat-card">
+      <span style="display: block; font-size: 1.5rem; margin-bottom: 8px;">🌍</span>
+      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">6 персонажей</span>
+      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Собеседники с уникальными характерами и голосами, каждый со своей историей.</span>
+    </div>
+    <div class="stat-card">
+      <span style="display: block; font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 4px;">∞</span>
+      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Текстовых сообщений</span>
+      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Никаких лимитов. Общайтесь столько, сколько нужно для вашей уверенности.</span>
+    </div>
+    <div class="stat-card">
+      <span style="display: block; font-size: 1.5rem; margin-bottom: 8px;">🎤</span>
+      <span style="display: block; font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Голос — без ограничений</span>
+      <span style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; display: block;">Отправляйте войсы сколько угодно. Лимит только на голосовые ответы бота — ваша практика говорения не прерывается.</span>
+    </div>
+  </div>
+
+  <p>Большинство конкурентов — это либо приложение с детской геймификацией, либо просто текстовый ChatGPT с базовым системным промптом. Speech Flow Pro занимает принципиально другую нишу: это персональный голосовой собеседник. Разница кроется в удержании: фраза, которую вы произнесли вслух в живом эмоциональном разговоре, остаётся с вами навсегда. Слово из заученной карточки — нет.</p>
+  <p>Бот доступен 24 часа в сутки прямо в Telegram. Без установки отдельного приложения. Пять минут голосовых сообщений перед сном или по пути на работу — любой формат работает на ваш результат.</p>
+
+
+
+  <div class="cta-section">
+    <h2>Начните говорить сегодня</h2>
+    <p style="color: #D1D5DB; font-size: 1.1rem; margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto;">Без скучных тестов. Без домашних заданий. Просто откройте бота и запишите своё первое голосовое.</p>
+    <a href="https://t.me/speechflowai_bot" class="btn-primary">Запустить в Telegram</a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    Speech Flow Pro &nbsp;·&nbsp; 2026
+  </div>
+</footer>
+
+</body>
+</html>
